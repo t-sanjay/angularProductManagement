@@ -5,7 +5,7 @@
     </p-dialog>
 
     <p-dialog header="Update Product" [(visible)]="displayUpdate" [style]="{width: '50vw', height: '70vh'}">
-        <app-updateproduct [productDetails]="toBeUpdateProduct"  (dataUpdatedSuccess)="updateCloseDialog($event)"></app-updateproduct>
+        <app-updateproduct (dataUpdateSuccess)="closeUpdateDialog($event)" [productDetails]="toBeUpdateProduct"  (dataUpdatedSuccess)="updateCloseDialog($event)"></app-updateproduct>
     </p-dialog>
     <div class="p-grid p-jc-end">
         <div class="p-col-4">

@@ -43,6 +43,15 @@ export class DashboardComponent implements OnInit {
     this.display = !data;
   }
 
+  closeUpdateDialog(data: any) {
+    console.log(data);
+    this.messageService.add({ severity: 'success', summary: 'Product Updated Successfully' });
+    this.productservice.getAllProducts().subscribe(res => {
+      this.allProducts(res);
+    });
+    this.displayUpdate = !data;
+  }
+
   updateCloseDialog(data : any){
     this.messageService.add({ severity: 'success', summary: 'Product Updated' });
     this.productservice.getAllProducts().subscribe(res => {

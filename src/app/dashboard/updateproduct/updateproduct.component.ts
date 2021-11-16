@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/product.service';
 
@@ -10,6 +10,8 @@ import { ProductService } from 'src/app/product.service';
 export class UpdateproductComponent implements OnInit {
 
   @Input() productDetails: any;
+  @Output() dataUpdateSuccess = new EventEmitter<boolean>();
+
   profileForm = new FormGroup({
     productName: new FormControl(null, [Validators.required]),
     code: new FormControl(null, Validators.required),
@@ -21,7 +23,6 @@ export class UpdateproductComponent implements OnInit {
   constructor(private productService : ProductService) { }
 
   ngOnInit(): void {
-    console.log(this.productDetails)
   }
 
   ngOnChanges() {
@@ -32,7 +33,10 @@ export class UpdateproductComponent implements OnInit {
       rating: this.productDetails.rating,
       categoryName: this.productDetails.categoryName,
     });
+    console.log(this.productDetails)
   }
+
+
   onSubmit() {
     if (this.profileForm.valid) {
       if (this.profileForm.value.rating == null) {
@@ -43,13 +47,18 @@ export class UpdateproductComponent implements OnInit {
         Price: this.profileForm.value.price,
         Code: this.profileForm.value.code,
         CategoryId: this.productDetails.categoryId,
-        rating: this.profileForm.value.rating
+        rating: this.profileForm.value.rating,
+        ProductId: this.productDetails.productId
       }
       console.log(productData);
       this.productService.updateProduct(productData).subscribe(res => {
-        console.log(res);
+        this.callParent(res);
       });      
     }
+  }
+
+  callParent(data : any){
+    this.dataUpdateSuccess.emit(data);
   }
 
 }
