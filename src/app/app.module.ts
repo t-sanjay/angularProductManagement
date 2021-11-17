@@ -18,6 +18,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import {ToastModule} from 'primeng/toast';
 import { UpdateproductComponent } from './dashboard/updateproduct/updateproduct.component';
+import { DetailsComponent } from './dashboard/details/details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UpdateproductComponent } from './dashboard/updateproduct/updateproduct.
     DashboardComponent,
     RupeePipe,
     AddproductComponent,
-    UpdateproductComponent
+    UpdateproductComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

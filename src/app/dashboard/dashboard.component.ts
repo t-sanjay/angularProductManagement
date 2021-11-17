@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   display: boolean = false;
   displayUpdate : boolean = false;
   toBeUpdateProduct : any;
+  displayList : boolean = false;
+  productDetails : any;
 
   constructor(private productservice: ProductService, private messageService: MessageService) { }
 
@@ -35,7 +37,6 @@ export class DashboardComponent implements OnInit {
   }
 
   closeDialog(data: any) {
-    console.log(data);
     this.messageService.add({ severity: 'success', summary: 'Product Added' });
     this.productservice.getAllProducts().subscribe(res => {
       this.allProducts(res);
@@ -76,5 +77,10 @@ export class DashboardComponent implements OnInit {
       });
     });
 
+  }
+
+  showdetails(data : any){
+    this.productDetails = data;
+    this.displayList = true;
   }
 }

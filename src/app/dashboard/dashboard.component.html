@@ -7,6 +7,9 @@
     <p-dialog header="Update Product" [(visible)]="displayUpdate" [style]="{width: '50vw', height: '70vh'}">
         <app-updateproduct (dataUpdateSuccess)="closeUpdateDialog($event)" [productDetails]="toBeUpdateProduct"  (dataUpdatedSuccess)="updateCloseDialog($event)"></app-updateproduct>
     </p-dialog>
+    <p-dialog header="Details" [(visible)]="displayList" [style]="{width: '50vw'}">
+        <app-details [productDetails]="productDetails"></app-details>
+    </p-dialog>
     <div class="p-grid p-jc-end">
         <div class="p-col-4">
             <button pButton type="button" label="Add Product" (click)="showDialog()"></button>
@@ -29,7 +32,9 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-product>
                     <tr>
-                        <td>{{product.productName}}</td>
+                        <td><a (click)="showdetails(product)">
+                            {{product.productName}} 
+                          </a> </td>
                         <td>{{product.code}}</td>
                         <td pTooltip="Pipe is used to add the Rupee symbol">{{product.price | rupee}}</td>
                         <td>{{product.categoryName}}</td>
